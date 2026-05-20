@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+*.pem
+outputs/
+sglang_logs/
+sandbox_logs/
+logs/
+wandb/
+eval_outputs/
+*.sqsh
+models/
+
+# Local paper draft (not part of the public release)
+*.tex
+*.pdf
+
+# HuggingFace upload staging area (review only; not part of the public release)
+hf-staging/
