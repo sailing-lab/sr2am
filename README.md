@@ -7,7 +7,7 @@
 </div>
 
 [![Paper](https://img.shields.io/badge/Paper-arXiv-red?logo=arxiv&logoColor=white)](https://arxiv.org)
-[![Website](https://img.shields.io/badge/Website-sr2am--agentic--llm-blue)](https://sr2am-self-regulated-planning.github.io)
+[![Website](https://img.shields.io/badge/Website-sr2am--self--regulated--planning-blue)](https://sr2am-self-regulated-planning.github.io)
 [![SR2AM-v0.1-8B](https://img.shields.io/badge/%F0%9F%A4%97%20SR2AM--v0.1--8B-yellow)](https://huggingface.co/sailing-lab/SR2AM-v0.1-8B)
 [![SR2AM-v1.0-30B](https://img.shields.io/badge/%F0%9F%A4%97%20SR2AM--v1.0--30B-yellow)](https://huggingface.co/sailing-lab/SR2AM-v1.0-30B)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
