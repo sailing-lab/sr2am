@@ -22,12 +22,9 @@ We argue that efficient agentic reasoning benefits from decomposing deliberation
 
 For more details, visit our [project website](https://sr2am-self-regulated-planning.github.io) or read the [paper](https://arxiv.org).
 
-
 We release two models:
 - **SR²AM-v0.1-8B**: Based on Qwen3-8B, competitive with 120--355B systems
 - **SR²AM-v1.0-30B**: Based on Qwen3-30B-A3B-Thinking-2507, competitive with 685B--1T systems while consuming 25--95% fewer reasoning tokens than comparably sized agentic LLMs
-
-> **Release scope**: This repository contains the inference and evaluation code only. Training data, SFT recipes, and RL training code are not part of this release.
 
 ## Main Results
 
@@ -314,6 +311,31 @@ Configure with `--code-sandbox-servers "HOST1 HOST2"` in the inference script. E
 All paper results use SerpAPI (the default search provider) and a fixed system prompt datetime (`Sun Aug 31 2025 23:34:17`). Pass `--fix_datetime` via `--extra-args` to enable.
 
 <details>
+<summary>Build the full test set</summary>
+
+The headline Pass@1 numbers are computed over a full test set of **8219 questions across 11 benchmarks**, with each benchmark repeated to reduce variance (aime24/aime25 ×32; gpqa_diamond/gaia/xbench_deepsearch ×4; all others ×1). The set is assembled from three upstream sources — obtain each and point the script at your local copies via environment variables:
+
+| Benchmarks | Source | Files |
+|:------|:-------|:------|
+| aime24, aime25, math500, gpqa_diamond, supergpqa, finqa, multihier | HF dataset [`LLM360/guru-RL-92k`](https://huggingface.co/datasets/LLM360/guru-RL-92k), `offline_eval/` subdir | `math__aime_repeated_8x_240.parquet`, `math__aime2025_repeated_8x_240.parquet`, `math__math_500.parquet`, `stem__gpqa_diamond_198.parquet`, `stem__supergpqa_1k.parquet`, `table__finqa_1.1k.parquet`, `table__multihier_336.parquet` |
+| browsecomp, hle, gaia | GitHub [`OPPO-PersonalAI/Agent_Foundation_Models`](https://github.com/OPPO-PersonalAI/Agent_Foundation_Models), `AFM/data/web_agent/test_benchmarks/` | `browsecomp.json`, `hle_test.json`, `gaia_dev_103.json` |
+| xbench_deepsearch | GitHub [`xbench-ai/xbench-evals`](https://github.com/xbench-ai/xbench-evals) | `data/DeepSearch-2505-decrypted.csv` (the repo ships an encrypted CSV — decrypt it per their instructions) |
+
+```bash
+# Point at your local copies of the three sources (defaults shown)
+export SR2AM_GURU_EVAL_ROOT=~/guru-RL-92k/offline_eval
+export SR2AM_AFM_BENCHMARKS_ROOT=~/Agent_Foundation_Models/AFM/data/web_agent/test_benchmarks
+export SR2AM_XBENCH_ROOT=~/xbench-evals/data
+
+python evaluation/prepare_test_data.py create_test_dataset_full \
+  --output_file data/sr2am_test_full.jsonl
+```
+
+This writes 8219 questions to `data/sr2am_test_full.jsonl`. The builder does not shuffle; pass `--shuffle_questions` at inference time (below) to distribute the web questions evenly across workers.
+
+</details>
+
+<details>
 <summary>Paper reproduction commands</summary>
 
 Key settings: SerpAPI (default search provider), `--fix_datetime` for fixed system prompt datetime, `--temperature 1.0` for 30B / `0.8` for 8B.
@@ -326,7 +348,7 @@ bash scripts/run_inference_local.sh \
   --model-path ./models/SR2AM-v1.0-30B \
   --model-name SR2AM-v1.0-30B \
   --model-size 30b \
-  --input-file data/test_questions.jsonl \
+  --input-file data/sr2am_test_full.jsonl \
   --output-file outputs/sr2am-v1.0-30b-results.jsonl \
   --browsing-summarize-model Qwen/Qwen3-30B-A3B-Instruct-2507-FP8 \
   --browsing-summarize-url http://SUMMARIZER_HOST:30000/v1 \
@@ -339,7 +361,7 @@ bash scripts/run_inference_local.sh \
   --model-path ./models/SR2AM-v0.1-8B \
   --model-name SR2AM-v0.1-8B \
   --model-size 8b \
-  --input-file data/test_questions.jsonl \
+  --input-file data/sr2am_test_full.jsonl \
   --output-file outputs/sr2am-v0.1-8b-results.jsonl \
   --browsing-summarize-model Qwen/Qwen3-30B-A3B-Instruct-2507-FP8 \
   --browsing-summarize-url http://SUMMARIZER_HOST:30000/v1 \

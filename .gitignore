@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 *.pem
 outputs/
+data/
 sglang_logs/
 sandbox_logs/
 logs/
