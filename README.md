@@ -32,7 +32,7 @@ We release two models:
   <img src="assets/main-results.png" width="95%" alt="SR²AM Pass@1 vs. parameter size and reasoning-token count" />
 </div>
 
-SR²AM-v0.1-8B and SR²AM-v1.0-30B sit above the size-vs-accuracy trendline in (a), and SR²AM-v1.0-30B is on the Pareto frontier of reasoning-token efficiency vs. accuracy among 30/32B agentic models in (b). The full benchmark breakdown is in the [paper](https://arxiv.org).
+SR²AM-v0.1-8B and SR²AM-v1.0-30B sit above the size-vs-accuracy trendline in (a), and SR²AM-v1.0-30B is on the Pareto frontier of reasoning-token efficiency vs. accuracy among 30/32B agentic models in (b). The full benchmark breakdown is in the [paper](https://arxiv.org/abs/2605.22138).
 
 ## Model Downloads
 
@@ -391,10 +391,12 @@ bash scripts/run_inference_local.sh \
 If you find SR²AM useful in your research, please cite our paper:
 
 ```bibtex
-@inproceedings{sr2am2026,
+@article{deng2026sr2am,
   title={Efficient Agentic Reasoning Through Self-Regulated Simulative Planning},
-  author={TODO},
-  booktitle={Preprint},
+  author={Deng, Mingkai and Hou, Jinyu and Neves, Lara Sá and
+          Pimpalkhute, Varad and Killian, Taylor W. and
+          Liu, Zhengzhong and Xing, Eric P.},
+  journal={arXiv preprint arXiv:2605.22138},
   year={2026}
 }
 ```
