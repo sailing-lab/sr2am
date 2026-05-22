@@ -6,7 +6,7 @@
   <img src="assets/model.png" width="90%" alt="SR2AM Illustration" />
 </div>
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv-red?logo=arxiv&logoColor=white)](https://arxiv.org)
+[![Paper](https://img.shields.io/badge/Paper-arXiv-red?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2605.22138)
 [![Website](https://img.shields.io/badge/Website-sr2am--self--regulated--planning-blue)](https://sailing-lab.github.io/sr2am-self-regulated-planning)
 [![SR2AM-v0.1-8B](https://img.shields.io/badge/%F0%9F%A4%97%20SR2AM--v0.1--8B-yellow)](https://huggingface.co/sailing-lab/SR2AM-v0.1-8B)
 [![SR2AM-v1.0-30B](https://img.shields.io/badge/%F0%9F%A4%97%20SR2AM--v1.0--30B-yellow)](https://huggingface.co/sailing-lab/SR2AM-v1.0-30B)
@@ -20,7 +20,7 @@ We argue that efficient agentic reasoning benefits from decomposing deliberation
 
 **SR²AM** (Self-Regulated Simulative Reasoning Agentic LLM) is our instantiation of this decomposition: the configurator and simulative planner are realized as distinct stages within an LLM's chain-of-thought reasoning, with the LLM itself serving as the world model in language space. By separating self-regulation, planning, and execution while preserving the expressiveness of free-form reasoning, SR²AM learns to plan *further ahead* rather than simply reason *more*, achieving competitive task performance with substantially fewer reasoning tokens.
 
-For more details, visit our [project website](https://sr2am-self-regulated-planning.github.io) or read the [paper](https://arxiv.org).
+For more details, visit our [project website](https://sailing-lab.github.io/sr2am-self-regulated-planning) or read the [paper](https://arxiv.org/abs/2605.22138).
 
 We release two models:
 - **SR²AM-v0.1-8B**: Based on Qwen3-8B, competitive with 120--355B systems
